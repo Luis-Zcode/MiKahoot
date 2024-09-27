@@ -24,90 +24,79 @@ const CreateTest = () => {
 
     return (
         <>
-            <Container className="">
-                <Card >
-                    <ListGroup variant="flush">
-                        <ListGroup.Item>
-                            <Row>
-                                <Col>
-                                    <Row>
-                                        <Col className="d-flex gap-3 justify-content-end mb-4 mt-3">
-                                            <NavLink to={'/'}>
-                                                <Button variant="danger" onClick={handleSubmit(handleCreateTest)}>
-                                                    Guardar cambios
-                                                </Button>
-                                            </NavLink>
-                                            <Button variant="primary" onClick={handleShow}>
-                                                Crear Pregunta
-                                            </Button>
-                                        </Col>
-                                    </Row>
-
-                                </Col>
-                            </Row>
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                            <Form className="mt-5">
-                                <Row>
-                                    <Col md={6}>
-                                        <Form.Group className="mb-3">
-                                            <Form.Label>Nombre del Test</Form.Label>
-                                            <Form.Control {...register('nombreTest', { required: 'No puede dejar vacio este campo' })} type="text" placeholder="Test de" />
-                                            {errors.nombreTest && <p className="text-danger">{errors.nombreTest.message}</p>}
-                                        </Form.Group>
-                                        <Form.Group className="mb-3">
-                                            <Form.Label>Autor del Test </Form.Label>
-                                            <Form.Control {...register('autor', { required: 'No puede dejar vacio este campo' })} type="text" placeholder="Autor" />
-                                            {errors.autor && <p className="text-danger">{errors.autor.message}</p>}
-                                        </Form.Group>
-                                    </Col>
-                                    <Col md={6}>
-                                        <Form.Group className="mb-3">
-                                            <Form.Label>{`Duracion del Test  `}
-                                                <Form.Text className="text-muted">
-                                                    (En minutos)
-                                                </Form.Text>
-                                            </Form.Label>
-                                            <Form.Control {...register('time', { required: 'No puede dejar vacio el campo', min: { value: 0, message: 'Ingrese un numero mayor a 0' } })} type="Number" placeholder="Tiempo" />
-                                            {errors.time && <p className="text-danger">{errors.time.message}</p>}
-                                        </Form.Group>
-                                    </Col>
-                                </Row>
-                            </Form>
-                        </ListGroup.Item>
-                        <ListGroup.Item>
-                            <Table bordered className="text-center">
-                                {preguntasCreate.length > 0 && (
-                                    <thead>
-                                        <tr>
-                                            <th>Pregunta</th>
-                                            <th>Respuestas</th>
-                                            <th>Respuesta correcta</th>
-                                            <th>Opciones</th>
-                                        </tr>
-                                    </thead>
-                                )}
-                                <tbody>
-                                    {preguntasCreate.map((pregunta, index) => (
-                                        <tr key={index}>
-                                            <td>{pregunta.pregunta}</td>
-                                            <td>{`${pregunta.respuesta1}, ${pregunta.respuesta2}, ${pregunta.respuesta3}, ${pregunta.respuesta4} `}</td>
-                                            <td>{pregunta.respuestaCorrecta}</td>
-                                            <td><Button onClick={() => handleDelete(index)}>Eliminar</Button></td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </Table>
-                        </ListGroup.Item>
-                    </ListGroup>
-                </Card>
+            <Container className="mt-5">
+                <Row>
+                    <Col>
+                        <Row>
+                            <Col className="d-flex gap-3 justify-content-end mb-4 mt-3">
+                                <NavLink to={'/'}>
+                                    <Button variant="danger" onClick={handleSubmit(handleCreateTest)}>
+                                        Guardar cambios
+                                    </Button>
+                                </NavLink>
+                                <Button variant="primary" onClick={handleShow}>
+                                    Crear Pregunta
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+                <Form className="mt-5">
+                    <Row>
+                        <Col md={6}>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Nombre del Test</Form.Label>
+                                <Form.Control {...register('nombreTest', { required: 'No puede dejar vacio este campo' })} type="text" placeholder="Test de" />
+                                {errors.nombreTest && <p className="text-danger">{errors.nombreTest.message}</p>}
+                            </Form.Group>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Autor del Test </Form.Label>
+                                <Form.Control {...register('autor', { required: 'No puede dejar vacio este campo' })} type="text" placeholder="Autor" />
+                                {errors.autor && <p className="text-danger">{errors.autor.message}</p>}
+                            </Form.Group>
+                        </Col>
+                        <Col md={6}>
+                            <Form.Group className="mb-3">
+                                <Form.Label>{`Duracion del Test  `}
+                                    <Form.Text className="text-muted">
+                                        (En minutos)
+                                    </Form.Text>
+                                </Form.Label>
+                                <Form.Control {...register('time', { required: 'No puede dejar vacio el campo', min: { value: 0, message: 'Ingrese un numero mayor a 0' } })} type="Number" placeholder="Tiempo" />
+                                {errors.time && <p className="text-danger">{errors.time.message}</p>}
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                </Form>
+                <Table bordered className="text-center" variant="success">
+                    {preguntasCreate.length > 0 && (
+                        <thead className='table-dark'>
+                            <tr>
+                                <th>Pregunta</th>
+                                <th>Respuestas</th>
+                                <th>Respuesta correcta</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                    )}
+                    <tbody>
+                        {preguntasCreate.map((pregunta, index) => (
+                            <tr key={index}>
+                                <td>{pregunta.pregunta}</td>
+                                <td>{`${pregunta.respuesta1}, ${pregunta.respuesta2}, ${pregunta.respuesta3}, ${pregunta.respuesta4} `}</td>
+                                <td>{pregunta.respuestaCorrecta}</td>
+                                <td><Button onClick={() => handleDelete(index)} variant="secondary">Eliminar</Button></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
             </Container>
 
             <Modal show={showCreate} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Pregunta</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body >
                     <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Pregunta</Form.Label>

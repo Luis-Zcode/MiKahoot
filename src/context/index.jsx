@@ -60,7 +60,7 @@ export const MiKahootProvider = ({ children }) => {
 
     const handleCreateTest = (data) => {
         const { autor, time, nombreTest } = data
-        if(preguntasCreate.length > 0){
+        if (preguntasCreate.length > 0) {
             const guardar = {
                 codigo: Math.random().toString(36).substring(2, 9), autor, time, nombreTest, preguntasCreate
             };
@@ -74,10 +74,10 @@ export const MiKahootProvider = ({ children }) => {
             reset()
             setPreguntasCreate([])
             navigate('/')
-        }else{
-            handleShow()
+        } else {
+            alert('agrege minimo 1 pregunta')
         }
-            
+
     }
 
     const [activate, setActivate] = useState({ respuesta1: true, respuesta2: true, respuesta3: true, respuesta4: true })
@@ -101,9 +101,14 @@ export const MiKahootProvider = ({ children }) => {
     };
 
     const Onsubmit = (data) => {
-        const { autor, time, nombreTest, ...dataFilter } = data
-        setPreguntasCreate([...preguntasCreate, dataFilter])
-        handleClose()
+        if (data.respuestaCorrecta) {
+            const { autor, time, nombreTest, ...dataFilter } = data
+            setPreguntasCreate([...preguntasCreate, dataFilter])
+            handleClose()
+        } else {
+            alert('Seleccione una respuesta')
+        }
+
     }
 
     const handleDelete = (index) => {
@@ -171,11 +176,11 @@ export const MiKahootProvider = ({ children }) => {
             handleDelete,
             actualizarRespuestaCorrecta,
             onChangeText,
-            hours, 
-            setHours, 
-            minutes, 
-            setMinutes, 
-            seconds, 
+            hours,
+            setHours,
+            minutes,
+            setMinutes,
+            seconds,
             setSeconds
         }}>
             {children}

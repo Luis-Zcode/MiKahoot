@@ -1,10 +1,11 @@
-import { useContext} from 'react';
+import { useContext, useEffect, useState} from 'react';
 import { Button, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { MiKahootContext } from '../../context';
 
 const LayoutAdmin = () => {
-    const {preguntas, copyLink} = useContext(MiKahootContext)
+    const {copyLink} = useContext(MiKahootContext)
+    const preguntas= JSON.parse(localStorage.getItem('tests')) 
     
     return (
         <>
@@ -35,7 +36,7 @@ const LayoutAdmin = () => {
                                     <td>{prueba.autor}</td>
                                     <td>{prueba.preguntasCreate.length}</td>
                                     <td>{prueba.codigo}</td>
-                                    <td> <Button variant='secondary' onClick={() => copyLink(prueba.codigo)} >Copy link</Button></td>
+                                    <td> <Button variant='success' onClick={() => copyLink(prueba.codigo)} >Copy link</Button></td>
                                 </tr>
                             ))}
                         </tbody>
