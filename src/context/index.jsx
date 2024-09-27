@@ -9,7 +9,7 @@ export const MiKahootProvider = ({ children }) => {
     const [test, setTest] = useState({})
     const [preguntas, setPreguntas] = useState(JSON.parse(localStorage.getItem('tests')))
     const [notFound, setNotFound] = useState(false)
-    const [count, setCount] = useState(3)
+    const [count, setCount] = useState(7)
     const [show, setShow] = useState(true)
     const [countPreguntas, setCountPreguntas] = useState(0)
     const [respuestasCorrectas, setRespuestasCorrectas] = useState(0)

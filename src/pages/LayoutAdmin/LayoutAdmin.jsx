@@ -15,7 +15,7 @@ const LayoutAdmin = () => {
                 </div>
                 <div className='d-flex flex-column justify-content-center' >
                     <Table responsive  bordered className="text-center" variant='secondary' >
-                        <thead>
+                        <thead className='table-dark'>
                             <tr className='border'>
                                 <th>#</th>
                                 <th>Nombre de la prueba</th>

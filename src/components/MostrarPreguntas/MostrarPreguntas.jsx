@@ -1,6 +1,5 @@
 import { useContext, useEffect } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import Carousel from 'react-bootstrap/Carousel';
 import { useParams } from "react-router-dom";
 import Temporizador from "../Temporizador/Temporizador";
 import { MiKahootContext } from "../../context";
